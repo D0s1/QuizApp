@@ -34,7 +34,7 @@
     async function showQuiz() {
       try {
         const data = await getQuizData();
-        output.textContent = JSON.stringify(data, null, 2);
+        output.textContent = data.results[0].question;
       } catch (err) {
         output.textContent = "Fehler: " + err.message;
       }
