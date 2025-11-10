@@ -4,7 +4,20 @@ export async function getQuizData() {
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Error API is not reachable.");
+    /**
+     * @typedef {Object} Question
+     * @property {string} question
+     * @property {string} correct_answer
+     * @property {string[]} incorrect_answers
+     */
 
+    /**
+     * @typedef {Object} ApiResponse
+     * @property {Question[]} results
+     * @property {number} response_code
+     * @property {string} category
+     */
+    /** @type {ApiResponse} */
     const data = await response.json(); // Transform to js
     if (!isDataValid(data)){
       return getQuizData();
@@ -12,8 +25,9 @@ export async function getQuizData() {
     console.log("Quizdaten:", data);
 
     // Save as var
-    const quizData = data;
-    return quizData;
+
+
+    return data;
   } catch (error) {
     return getQuizData();
   }
